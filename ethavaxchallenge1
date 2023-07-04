@@ -1,0 +1,22 @@
+pragma solidity ^0.8.0;
+
+contract AdminContract {
+    address public admin;
+
+    constructor() {
+        admin = msg.sender;
+    }
+
+    modifier onlyAdmin() {
+        require(msg.sender == admin, "Only admin can access this function.");
+        _;
+    }
+
+    function adminFunction() public view onlyAdmin returns (string memory) {
+        return "This function can only be accessed by the admin.";
+    }
+
+    function someFunction() public view returns (string memory) {
+        return "This function can be accessed by anyone.";
+    }
+}
